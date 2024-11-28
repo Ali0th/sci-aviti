@@ -9,11 +9,11 @@ AVITI output folder structure and file types are different than those of Illumin
 
 Before converting to FASTQ:
 
-- Update the `RunManifest.json` file to include `index1` and `index2` in the FASTQ files. The `RunManifest.json` file is located in the AVITI sequencing output folder. An example of `RunManifest.json` that includes `index1` and `index2` can be found at   
-`/g/hvu/MVlachonikolou/all_you_need_for_AVITI`. 
+- Update the `RunManifest.json` file to include `index1` and `index2` in the FASTQ files. The `RunManifest.json` file is located in the AVITI sequencing output folder. An example of `RunManifest.json` that includes `index1` and `index2` can be found at this github repository. 
 
-- Update `RunManifest.csv` with fake indices to direct all the reads along with the indices in the header to the Unassigned FASTQ files. An example of a fake `RunManifest.csv` can be found at  
-`/g/hvu/MVlachonikolou/all_you_need_for_AVITI`. 
+
+- Update `RunManifest.csv` with fake indices to direct all the reads along with the indices in the header to the Unassigned FASTQ files. An example of a fake `RunManifest.csv` can be found at this github repository.  
+
 
 To convert the BCL files to FASTQ, simply run:
 
@@ -30,8 +30,8 @@ For more details, see [https://docs.elembio.io/docs/bases2fastq/](https://docs.e
 
 ## Step 2: `sci-rocket` demultiplexing 
 
-The `.fastq.gz` files are almost identical to Illumina's, apart from an important difference. Illumina sequences the reverse complement of the `p5` index. `sci-rocket` takes this into account when reading the sequences and reverses the `p5` to match the `example_barcodes`. AVITI, on the other hand, reads `p5` exactly as it is on the `example_barcodes` list. To avoid errors, create a modified `example_barcodes.tsv` file with reverse complement `p5` oligos and point the `sci-rocket` config file to it. An example of an updated `example_barcodes.tsv` can be found at  
-`/g/hvu/MVlachonikolou/all_you_need_for_AVITI`. 
+The `.fastq.gz` files are almost identical to Illumina's, apart from an important difference. Illumina sequences the reverse complement of the `p5` index. `sci-rocket` takes this into account when reading the sequences and reverses the `p5` to match the `example_barcodes`. AVITI, on the other hand, reads `p5` exactly as it is on the `example_barcodes` list. To avoid errors, create a modified `example_barcodes.tsv` file with reverse complement `p5` oligos and point the `sci-rocket` config file to it. An example of an updated `example_barcodes.tsv` can be found at this github repository.  
+
 
 Finally, point the `path_fastq` of the `sci-rocket sample_sheet.tsv` to:   
 `path/to/bases2fastq_output/Samples/Unassigned`
