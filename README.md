@@ -1,9 +1,5 @@
----
-title: "How to demultiplex AVITI"
-output:
-  pdf_document: default
-  html_document: default
-date: "2024-11-28"
+Make AVITI sci-seq data compatible with the sci-rocket pipeline
+date: 2024-11-28
 ---
 
 Element Biosciences' NGS platform (AVITI) offers a lower price per read compared to illumina. Due to its unique chemistry, there are differences in the sequencing output files of AVITI which make it incompatible with the `bcl2fastq` part of `sci-rocket`. For this reason, until the `sci-rocket` pipeline is updated to become AVITI-compatible, some extra steps need to be taken in order to process the sequencing files. 
