@@ -1,4 +1,4 @@
-#Make AVITI sci-seq data compatible with the sci-rocket pipeline
+##Make AVITI sci-seq data compatible with the sci-rocket pipeline
 
 date: 2024-11-28
 
