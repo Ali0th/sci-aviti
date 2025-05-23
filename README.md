@@ -40,6 +40,33 @@ This will have the unidentified `R1` and `R2` `.fastq.gz` files.
 
 Now you are ready to run `sci-rocket` on your AVITI sequencing data!
 
+
+
+## Step 3: Merging AVITI and Illumina sequencing data
+
+If you want to merge datasets from different libraries sequenced on different platforms, it’s straightforward—you can simply merge the count matrices as usual.
+
+However, if you have sequenced the same library twice, merging the count matrices directly is not recommended. Instead, you need to merge the raw FASTQ files before processing, to ensure correct UMI collapsing and avoid artifacts.
+
+Because AVITI and Illumina differ in how they encode the p5 index sequence, you first need to make their p5 indices compatible. This involves reverse-complementing the p5 sequences in the headers of AVITI’s R1 and R2 FASTQ files. Once this step is done, you can merge the AVITI FASTQ files with the Illumina FASTQ files.
+
+To facilitate this, I wrote a script:  
+`fix_aviti_fastq_headers.py`  
+and an example SLURM job script for the R1 reads:  
+`fixp5_R1.slurm`
+
+Example command to merge the FASTQ files using pigz for compression:
+
+```{bash, eval=FALSE}
+zcat /path/to/Undetermined_S0_R1_001.fastq.gz \
+    /path/to/Undetermined_S0_R1_001.fixed.fastq.gz \
+| ~/pigz-2.8/pigz -p 4 > /path/to/merged_fastq/Undetermined_S0_R1_001.fastq.gz
+```
+
+Since writing large FASTQ files (e.g., from a 500 million read run) takes considerable time, it might be efficient in the future to combine the index-fixing and merging steps into a single script.
+
+After converting and merging the p5 sequences, you can run the original sci-rocket pipeline on the merged FASTQ files without any further modifications.
+
+
 Good Luck,  
 MV
-
